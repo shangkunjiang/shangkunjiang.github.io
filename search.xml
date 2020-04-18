@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2020/04/18/hello-world/"/>
+      <url>/2020/04/18/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Materials Studio报错及解决办法汇总</title>
+      <link href="/2020/04/07/Materials%20Studio%E6%8A%A5%E9%94%99%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+      <url>/2020/04/07/Materials%20Studio%E6%8A%A5%E9%94%99%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p><strong>报错一</strong>：The folder could not be created:<br>BSTR could not be converted to narrow CP_ACP string without use of surrogate pairs, in BSTRToString()<br>解决方式：找出这个Project所在目录及所有子目录中是否有中文字符，改成英文名。PS：此问题可能由于微软账号名为中文导致，则需要注意选择安装目录、Project存放目录、临时文件存放目录（在新建Project时会提醒，容易忽略）<br><strong>报错二</strong>：用dmol3计算的时候出现给定关键字不在字典中<br>解决方式：8.0及其更低版本在win10系统中会出现此类问题，建议换更高版本软件在win10环境下使用，否则重装win7.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Materials Studio </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Materials Studio </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>VASP报错及解决办法汇总</title>
+      <link href="/2020/04/07/VASP%E6%8A%A5%E9%94%99%E5%8F%8A%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%E6%B1%87%E6%80%BB/"/>
+      <url>/2020/04/07/VASP%E6%8A%A5%E9%94%99%E5%8F%8A%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%E6%B1%87%E6%80%BB/</url>
+      
+        <content type="html"><![CDATA[<p><strong>这篇博文用以记录我在学习VASP过程中所遇到的问题及解决方法。</strong></p><p>仅供参考！</p><p>VERY BAD NEWS! internal error in subroutine SGRCON: Found some non-integer element in rotation matrix<br><strong>解决办法</strong>：在INCAR中添加<strong>SYMPREC</strong>参数 ，改变体系的对称性精度。默认值为1E-5。值越大，精度越低。建议改为1E-4，也可改为1E-6。</p><p>WARNING: small aliasing (wrap around) errors must be expected<br><strong>解决办法</strong>：适当提高INCAR中截断能<strong>ENCUT</strong>这个参数。不过这个报错在大多数情况下可以忽略，建议查阅文献，或者做截断能测试进行设置。</p><p>ERROR: charge density could not be read from file CHGCAR for ICHARG&gt;10<br>解决办法：这是我计算band-structure出现的错误，网上众多答案指出POSCAR的晶格不一致。我是直接把SCF的POSCAR复制过来进行计算，改成CONTCAR后解决问题。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> VASP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> VASP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
